@@ -80,9 +80,11 @@ nav p {
 
 .item {
     display: flex;
-    background: #eaeaea;
+    background: rgb(250, 250, 250);
     justify-content: space-between;
     margin-bottom: 0.5rem;
+    border-bottom: 2px solid #8a8282;
+    padding: 2px 0;
 }
 
 .checkbox {
@@ -108,7 +110,7 @@ nav p {
     border-radius: 2rem;
     border: unset;
     background:#00805a;
-    
+
 }
 
 .deleteButton {
