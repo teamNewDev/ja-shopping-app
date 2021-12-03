@@ -3,13 +3,23 @@
     padding: unset;
 }
 
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
 nav {
-    background: #00805a;
+    background: orange;
     height: 3rem;
     line-height: 3rem;
-    color: white;
-    padding-left: 2rem;
+    color: #000;
+    padding-left: 4rem;
     margin-bottom: 1rem;
+    position: relative;
+}
+
+nav p {
+    font-weight: 600;
+
 }
 
 .container {
@@ -31,15 +41,40 @@ nav {
     width: 3rem;
 }
 
-#addItemButton {
+#addItemButton, #clearAll {
     border: unset;
     background: #00805a;
     color: #fff;
-    padding: 0.5rem;
+    font-size: .9rem;
+    font-weight: 600;
+    padding: 0.5rem 1.25rem;
+    border-radius: 0.75rem;
+}
+
+#clearAll {
+    padding: 0.5rem 1.25rem;
+    margin-left: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    background: orange;
+    color: black;
+    border-radius: 0.5rem;
+}
+
+#addItemButton:hover, #addItemButton:focus {
+    color: black;
+    background: orange;
+    margin-top: 0.3rem;
+}
+
+#clearAll:hover, #clearAll:focus {
+    background: #00805a;
+    color: #fff;
+    margin-top: 0.3rem;
 }
 
 #itemsDiv {
-    margin-top: 3rem;
+    margin-top: 2rem;
     margin-bottom: 2rem;
 }
 
@@ -53,6 +88,7 @@ nav {
 .checkbox {
     height: 100%;
     width: 2.5rem;
+    cursor: pointer;
 }
 
 .itemInfo {
@@ -73,6 +109,7 @@ nav {
     font-size: 0.8rem;
     width: 2.5rem;
     text-align: center;
+    cursor: pointer;
 }
 
 .deleteButton:active {
@@ -80,8 +117,13 @@ nav {
 }
 
 #totalPriceDiv {
-    margin: 2rem 0 0 2rem;
-    font-weight: 600;
+    margin-left: 2rem;
+    margin-top: 0.75rem;
+    font-weight: 400;
+} 
+
+button {
+    cursor: pointer;
 }
 
 .purchased {

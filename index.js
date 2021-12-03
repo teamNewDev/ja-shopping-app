@@ -21,23 +21,30 @@ const populateItemsDiv = async() => {
         
             <div class="itemInfo">
                 <p class="item-name">${item.name}</p>
-                <p>$${item.price} x ${item.quantity}</p>
+                <p>#${item.price} x ${item.quantity}</p>
             </div>
         
             <button class="deleteButton" onclick="removeItem(${item.id})">
             X
             </button>
+
+            <button class="deleteButton" onclick="toggleItemEdit(${item.id})">
+                <i class="far fa-edit" style="font-size: 24px"></i>
+            </button>
         </div>
     `).join (seperator = ' ')
+
+
 
     const arrayOfPrices = allItems.map (item => item.price * item.quantity)
     const totalPrice = arrayOfPrices.reduce((a, b) => a + b, 0)
 
-    totalPriceDiv.innerText = 'Total Price: $' + totalPrice
+
+
+    totalPriceDiv.innerText = 'Total Price: #' + totalPrice
 }
 
 window.onload = populateItemsDiv
-
 
 itemForm.onsubmit = async(event) => {
     event.preventDefault()
@@ -45,12 +52,33 @@ itemForm.onsubmit = async(event) => {
     const name = document.getElementById('nameInput').value
     const quantity = document.getElementById('quantityInput').value
     const price = document.getElementById('priceInput').value
+    const itemFormMode = document.getElementById("itemFormMode").value
+    const currentEditingItem = Number(document.getElementById("currentEditingItem").value)
 
-    await db.items.add({ name, quantity, price })
+
+
+    if (itemFormMode == 'edit') {
+        await db.items.update(currentEditingItem, { name: name, quantity: quantity, price: price})
+        document.getElementById("addItemButton").innerText = "Add Item"
+        document.getElementById("itemFormMode").value = "create"
+    } else {
+        await db.items.add({name, quantity, price})
+    }
+
     await populateItemsDiv()
     itemForm.reset()
-
 }
+
+const toggleItemEdit = async(id) => {
+    const itemData = await db.items.get(id)
+    document.getElementById("nameInput").value = itemData.name
+    document.getElementById("quantityInput").value = itemData.quantity
+    document.getElementById("priceInput").value = itemData.price
+    document.getElementById("currentEditingItem").value = itemData.id
+    document.getElementById("itemFormMode").value = "edit"
+    document.getElementById("addItemButton").innerText = "Update Item"
+}
+
 
 const toggleItemStatus = async(event, id) => {
     await db.items.update(id, {isPurchased: !!event.target.checked})
@@ -62,5 +90,10 @@ const removeItem = async(id) => {
     await populateItemsDiv()
 }
 
-
+const clearAll = async() => {
+    // items = document.getElementById("itemsDiv")
+    await db.items.clear()
+    itemsDiv.innerHTML = ''
+    totalPriceDiv.innerText = 'Total Price: #0'
+}
 
