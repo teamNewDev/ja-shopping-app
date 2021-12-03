@@ -23,14 +23,15 @@ const populateItemsDiv = async() => {
                 <p class="item-name">${item.name}</p>
                 <p>#${item.price} x ${item.quantity}</p>
             </div>
+
+            <button class="editButton" onclick="toggleItemEdit(${item.id})">
+                Edit <i class="far fa-edit" style="font-size: 24px"></i>
+            </button>
         
             <button class="deleteButton" onclick="removeItem(${item.id})">
             X
             </button>
 
-            <button class="deleteButton" onclick="toggleItemEdit(${item.id})">
-                <i class="far fa-edit" style="font-size: 24px"></i>
-            </button>
         </div>
     `).join (seperator = ' ')
 

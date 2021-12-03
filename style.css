@@ -101,6 +101,16 @@ nav p {
     text-transform: capitalize;
 }
 
+.editButton {
+    margin-right: 0.5rem;
+    padding: 0.5rem 1.25rem;
+    color: white;
+    border-radius: 2rem;
+    border: unset;
+    background:#00805a;
+    
+}
+
 .deleteButton {
     margin: 0 0 0 auto;
     border: unset;
